@@ -7,7 +7,9 @@ import useFetchdata from "./hooks/useFetchdata";
 const FetchData = () => {
   const dispatch = useDispatch();
 
-  const { clickEvent, data } = useFetchdata();
+  const { clickEvent, data, error } = useFetchdata();
+
+  dispatch(weatherActions.errorData(error));
 
   if (clickEvent) {
     dispatch(weatherActions.currentCity(data.name));

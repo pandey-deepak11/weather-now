@@ -69,6 +69,10 @@ p {
   margin-left: -80px;
 }
 
+.location p {
+  margin-right: 20px;
+}
+
 .location img,
 .long-lat img,
 .sunrise img,

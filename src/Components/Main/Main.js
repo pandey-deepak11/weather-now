@@ -8,6 +8,7 @@ import linkedin from "./../../Images/linkedin.png";
 import useClickHandler from "./../hooks/useClickHandler";
 import AOS from "aos";
 import "aos/dist/aos.css"; // You can also use <link> for styles
+import { useSelector } from "react-redux";
 // ..
 AOS.init();
 
@@ -15,18 +16,18 @@ const Main = () => {
   // let loading = false;
   const [enteredValue, setEnteredValue] = useState("");
   const [loading, setLoading] = useState(false);
+
   const { ClickHandler, click } = useClickHandler();
 
   const changeHandler = (e) => {
     setEnteredValue(e.target.value);
-    console.log(e.target.value);
   };
 
   const deviceClickHandler = () => {
     setTimeout(() => {
       ClickHandler(true, enteredValue, false);
       setLoading(false);
-    }, 1000);
+    }, 2500);
     setLoading(true);
   };
 
@@ -34,7 +35,7 @@ const Main = () => {
     setTimeout(() => {
       ClickHandler(false, enteredValue, true);
       setLoading(false);
-    }, 1000);
+    }, 3000);
     setLoading(true);
     setEnteredValue("");
   };
@@ -63,7 +64,13 @@ const Main = () => {
           </h1>
         </header>
         <article>
-          <div className="search" id="search">
+          <div
+            className="search"
+            id="search"
+            data-aos="slide-left"
+            data-aos-delay="100"
+            data-aos-duration="2000"
+          >
             <input
               type="text"
               name="location"

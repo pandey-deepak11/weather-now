@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { weatherActions } from "../../Store";
 
@@ -6,10 +6,10 @@ const useClickHandler = () => {
   const [click, setClick] = useState(false);
   const dispatch = useDispatch();
 
-  const ClickHandler = useCallback((isClicked, value, fetchCity) => {
-    if (isClicked) {
-      dispatch(weatherActions.clickEvent(isClicked));
-    }
+  const ClickHandler = (isClicked, value, fetchCity) => {
+    // if (isClicked) {
+    dispatch(weatherActions.clickEvent(isClicked));
+    // }
 
     if (!click) {
       setClick(true);
@@ -25,7 +25,7 @@ const useClickHandler = () => {
         behavior: "smooth",
       });
     }, 300);
-  });
+  };
 
   return {
     ClickHandler,

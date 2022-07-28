@@ -7,7 +7,6 @@ import pin from "./../../Images/pin.png";
 const RecentCities = () => {
   const data = useSelector((state) => state.recentSearchedCity);
 
-  console.log(data);
   return (
     <div className="recent">
       {/* { data.length >0 ? */}

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./../Main/WeatherInfo.css";
 import { useSelector } from "react-redux";
-import moment from "react-moment";
 import SimpleDateTime from "react-simple-timestamp-to-date";
 import placeholder from "./../../Images/placeholder.png";
 import compass from "./../../Images/compass.png";
@@ -23,7 +22,8 @@ import "aos/dist/aos.css"; // You can also use <link> for styles
 AOS.init();
 const WeatherInfo = () => {
   let b;
-  // const [weather, setWeather] = useState(clearSky);
+  const error = useSelector((state) => state.error);
+  const clickEvent = useSelector((state) => state.click);
   const data = useSelector((state) => state.city);
 
   // const weatherImage = () => {
@@ -65,7 +65,7 @@ const WeatherInfo = () => {
 
   return (
     <>
-      {data.name ? (
+      {!error ? (
         <div
           className="weatherConditions"
           data-aos="fade-in"
@@ -133,7 +133,15 @@ const WeatherInfo = () => {
         </div>
       ) : (
         <div>
-          <p>Please Enter Correct City Name</p>
+          <h4
+            style={{
+              color: "red",
+              position: "absolute",
+              left: "30%",
+            }}
+          >
+            Not Found : Please Enter Correct City Name
+          </h4>
         </div>
       )}
       )

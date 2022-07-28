@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
@@ -6,6 +6,7 @@ const useFetchdata = () => {
   const cityValue = useSelector((state) => state.cityData);
   const city = cityValue ? cityValue : "Delhi";
   const [data, setData] = useState({});
+  const [error, setError] = useState("");
   const clickEvent = useSelector((state) => state.click);
   const device = useSelector((state) => state.deviceLocation);
   const url = clickEvent
@@ -15,14 +16,18 @@ const useFetchdata = () => {
   useEffect(() => {
     axios
       .get(url)
-      .then((response) => setData(response.data))
-      .catch((err) => console.log(err));
+      .then((response) => {
+        setData(response.data);
+        setError(false);
+      })
+      .catch((err) => setError(true));
     // }
   }, [url]);
 
   return {
     data,
     clickEvent,
+    error,
   };
 };
 

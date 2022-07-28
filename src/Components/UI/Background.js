@@ -1,4 +1,5 @@
-import React, { useReducer, useState } from "react";
+import React, { useEffect, useState } from "react";
+import "./Background.css";
 
 import Navbar from "./Navbar";
 import Main from "../Main/Main";
@@ -9,63 +10,71 @@ import t5 from "./../../Images/sunnyyy.jpg";
 import t1 from "./../../Images/clear.jpg";
 
 const Background = () => {
-  const initialState = {
-    isLoading: false,
-  };
-
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case "Started":
-        return (state.isLoading = false);
-
-      case "Completed":
-        return (state.isLoading = true);
-    }
-  };
-
   // let loading = false;
-  let b;
+  // let b;
   const [bg, setBg] = useState("t1");
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [back, setBack] = useState(null);
+  const [loading, setLoading] = useState(false);
   const backgroundHandler = (value) => {
     setBg(value);
+    setLoading(true);
   };
 
-  if (bg === "t1") {
-    b = t1;
-  }
-  if (bg === "t2") {
-    b = t2;
-  }
-  if (bg === "t3") {
-    b = t3;
-  }
-  if (bg === "t4") {
-    b = t4;
-  }
-  if (bg === "t5") {
-    b = t5;
-  }
-  if (bg === "t6") {
-    dispatch({ type: "Started" });
-    b = "https://source.unsplash.com/random/900×700/?weather";
-    dispatch({ type: "Started" });
-  }
+  var b = "";
+  useEffect(() => {
+    if (bg === "t1") {
+      b = t1;
+      // console.log(loading);
+    }
+    if (bg === "t2") {
+      b = t2;
+      // console.log(loading);
+    }
+    if (bg === "t3") {
+      b = t3;
+    }
+    if (bg === "t4") {
+      b = t4;
+    }
+    if (bg === "t5") {
+      b = t5;
+    }
+    if (bg === "t6") {
+      b = "https://source.unsplash.com/random/500×300/?weather";
+    }
 
-  console.log(state.isLoading);
+    setTimeout(() => {
+      setLoading(false);
+    }, 300);
+
+    setBack(b);
+  }, [bg]);
+
+  // }, []);
 
   return (
     <>
       <div
         style={{
-          backgroundImage: `url(${b})`,
+          backgroundImage: `url(${back})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           width: "100%",
           height: "100%",
           backgroundPosition: "center",
         }}
+        className="Background"
       >
+        {loading ? (
+          <div
+            style={{ color: "white", position: "absolute", top: "350px" }}
+            className="lds-circle"
+          >
+            <div></div>
+          </div>
+        ) : (
+          ""
+        )}
         {/* {state.isLoading ? <p>"True"</p> : <p>"false"</p>} */}
         <Navbar onBackground={backgroundHandler} />
         <Main />

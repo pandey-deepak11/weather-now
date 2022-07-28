@@ -115,11 +115,12 @@ article button:hover {
   margin-right: 30px;
   box-shadow: 0 0 3px 1px rgb(197, 195, 195);
   transition: transform 0.4s;
+  background-color: rgb(41, 40, 40);
 }
 
 .logos img:hover {
   box-shadow: 0 0 5px 4px rgb(197, 195, 195);
-
+  background-color: rgb(90, 86, 86);
   transform: scale(1.1);
 }
 
