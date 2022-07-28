@@ -131,3 +131,8 @@ p {
   /* margin-top: -10px; */
   margin-right: 24px;
 }
+
+.error-details {
+  margin-left: 350px;
+  width: 45%;
+}

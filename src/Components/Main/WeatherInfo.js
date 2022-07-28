@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./../Main/WeatherInfo.css";
 import { useSelector } from "react-redux";
 import SimpleDateTime from "react-simple-timestamp-to-date";
@@ -23,12 +23,9 @@ AOS.init();
 const WeatherInfo = () => {
   let b;
   const error = useSelector((state) => state.error);
-  const clickEvent = useSelector((state) => state.click);
-  const data = useSelector((state) => state.city);
 
-  // const weatherImage = () => {
-  //   setWeather(data.weather.main);
-  // };
+  // const clickEvent = useSelector((state) => state.click);
+  const data = useSelector((state) => state.city);
 
   if (data.weather[0].main === "Clear") {
     b = clearSky;
@@ -49,7 +46,7 @@ const WeatherInfo = () => {
     data.weather[0].main ===
     ("Mist" ||
       "Smoke" ||
-      "Haze" ||
+      "haze" ||
       "Dust" ||
       "Fog" ||
       "Sand" ||
@@ -80,8 +77,8 @@ const WeatherInfo = () => {
             <div className="long-lat">
               <img src={compass} alt="compass" />
               <div className="lon-lat">
-                <p>Longitude :{data.coord.lon}</p>
-                <p className="lat">Latitude: {data.coord.lat}</p>
+                <p>Longitude :{data.coord.lon.toFixed(2)}</p>
+                <p className="lat">Latitude: {data.coord.lat.toFixed(2)}</p>
               </div>
             </div>
             <div className="sunrise">
@@ -121,23 +118,26 @@ const WeatherInfo = () => {
             <div className="temp-img">
               <img src={temperature} alt="temp" />
               <div className="temp">
-                <p>Max-temperature: {data.main.temp_max}</p>
-                <p>Min-Temperature: {data.main.temp_min}</p>
+                <p>
+                  Max-temperature: {(data.main.temp_max - 273).toFixed(1)}°C
+                </p>
+                <p>
+                  Min-Temperature: {(data.main.temp_min - 273).toFixed(1)}°C
+                </p>
               </div>
             </div>
             <div className="humidity">
               <img src={humidity} alt="humidity" />
-              <p>Humidity: {data.main.humidity}</p>
+              <p>Humidity: {data.main.humidity}%</p>
             </div>
           </div>
         </div>
       ) : (
-        <div>
+        <div className="cityDetails error-details">
           <h4
             style={{
               color: "red",
               position: "absolute",
-              left: "30%",
             }}
           >
             Not Found : Please Enter Correct City Name

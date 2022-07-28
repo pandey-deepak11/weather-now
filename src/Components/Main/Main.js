@@ -27,7 +27,7 @@ const Main = () => {
     setTimeout(() => {
       ClickHandler(true, enteredValue, false);
       setLoading(false);
-    }, 2500);
+    }, 2000);
     setLoading(true);
   };
 
@@ -35,7 +35,7 @@ const Main = () => {
     setTimeout(() => {
       ClickHandler(false, enteredValue, true);
       setLoading(false);
-    }, 3000);
+    }, 2000);
     setLoading(true);
     setEnteredValue("");
   };

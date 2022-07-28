@@ -23,12 +23,7 @@ const Navbar = (props) => {
         </div>
         <div className="dropdown">
           <h5>Change Wallpaper</h5>
-          {/* <div
-            style={{
-              backgroundImage: `url(${t})`,
-              backgroundAttachment: "fixed",
-            }}
-          > */}
+
           <select className="select" onChange={selectHandler}>
             <option value="t1">Clear Night</option>
             <option value="t2">Cloudy</option>
@@ -37,7 +32,6 @@ const Navbar = (props) => {
             <option value="t5">Sunny</option>
             <option value="t6">Random</option>
           </select>
-          {/* </div> */}
         </div>
       </nav>
     </div>

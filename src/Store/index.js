@@ -9,6 +9,7 @@ const initialState = {
   deviceLocation: {},
   city: {},
   error: false,
+  invalid: false,
 };
 
 const weatherSlice = createSlice({
@@ -20,19 +21,19 @@ const weatherSlice = createSlice({
         action.payload.charAt(0).toUpperCase() +
         action.payload.slice(1).toLowerCase();
 
-      if (!state.click && !state.recentSearchedCity.includes(action.payload)) {
-        if (
-          action.payload.length > 0 &&
-          state.recentSearchedCity.length > 5 &&
-          state.error
-        ) {
+      if (
+        !state.click &&
+        !state.recentSearchedCity.includes(state.cityData) &&
+        !state.invalid
+      ) {
+        if (action.payload.length > 0 && state.recentSearchedCity.length > 5) {
           state.recentSearchedCity.shift();
           state.recentSearchedCity.push(
             action.payload.charAt(0).toUpperCase() +
               action.payload.slice(1).toLowerCase()
           );
         } else {
-          if (action.payload.length > 0 && state.error) {
+          if (action.payload.length > 0) {
             state.recentSearchedCity.push(
               action.payload.charAt(0).toUpperCase() +
                 action.payload.slice(1).toLowerCase()
@@ -42,6 +43,7 @@ const weatherSlice = createSlice({
         localStorage.setItem("searchedCity", state.recentSearchedCity);
       }
     },
+
     clickEvent(state, action) {
       state.click = action.payload;
     },
@@ -57,6 +59,9 @@ const weatherSlice = createSlice({
     },
     errorData(state, action) {
       state.error = action.payload;
+    },
+    invalidValue(state, action) {
+      state.invalid = action.payload;
     },
   },
 });
